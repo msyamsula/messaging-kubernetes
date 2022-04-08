@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messaging-api
+  labels:
+    app: messaging-api
+    type: deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: messaging-api
+      type: pod
+  template:
+    metadata:
+      labels:
+        app: messaging-api
+        type: pod
+    spec:
+      containers:
+      - name: messaging-api
+        image: syamsuldocker/messaging-api-kubernetes:v0.0.11
+        ports:
+        - containerPort: 5000
+        env:
+          - name: GIN_MODE
+            value: release

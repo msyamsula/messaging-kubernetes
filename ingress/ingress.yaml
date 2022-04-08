@@ -1,0 +1,38 @@
+# do this before applying this ingress (without issuer and tls)
+# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+# helm install ingress-nginx ingress-nginx/ingress-nginx  
+# it will create load balancer, apply load balancer to your domain
+# move to cluster issuer, apply that
+# move back, add cluster issuer and tls config
+# apply this ingress again
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: messaging-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod # cluster issuer
+spec:
+  tls: # tls config
+  - hosts:
+    - syamsulkube.my.id
+    secretName: syamsulkube-tls
+  rules:
+  - host: syamsulkube.my.id
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: messaging-client-clusterip
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: messaging-api-clusterip
+            port:
+              number: 5000

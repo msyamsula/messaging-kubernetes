@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: messaging-api-clusterip
+  labels:
+    app: messaging-api
+    type: clusterip
+spec:
+  selector:
+    app: messaging-api
+    type: pod
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

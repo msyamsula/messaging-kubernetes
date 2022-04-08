@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messaging-client
+  labels:
+    app: messaging-client
+    type: deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: messaging-client
+      type: pod
+  template:
+    metadata:
+      labels:
+        app: messaging-client
+        type: pod
+    spec:
+      containers:
+      - name: messaging-client
+        image: syamsuldocker/messaging-client-kubernetes:v0.0.8
+        ports:
+        - containerPort: 80

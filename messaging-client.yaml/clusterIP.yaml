@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: messaging-client-clusterip
+  labels:
+    app: messaging-client
+    type: clusterip
+spec:
+  selector:
+    app: messaging-client
+    type: pod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

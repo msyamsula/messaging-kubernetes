@@ -1,0 +1,48 @@
+# do this before apply issuer (see cert-manager website for latest version)
+# helm repo add jetstack https://charts.jetstack.io
+# helm repo update
+# kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.crds.yaml
+# helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.8.0
+
+
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    # You must replace this email address with your own.
+    # Let's Encrypt will use this to contact you about expiring
+    # certificates, and issues related to your account.
+    email: culcalcul22@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: letsencrypt-secret-prod
+    # Add a single challenge solver, HTTP01 using nginx
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+
+
+# staging
+# apiVersion: cert-manager.io/v1alpha2
+# kind: ClusterIssuer
+# metadata:
+#   name: letsencrypt-staging
+# spec:
+#   acme:
+#     # You must replace this email address with your own.
+#     # Let's Encrypt will use this to contact you about expiring
+#     # certificates, and issues related to your account.
+#     email: raspberry-pi@home.pi
+#     server: https://acme-staging-v02.api.letsencrypt.org/directory
+#     privateKeySecretRef:
+#       # Secret resource that will be used to store the account's private key.
+#       name: example-issuer-account-key
+#     # Add a single challenge solver, HTTP01 using nginx
+#     solvers:
+#     - http01:
+#         ingress:
+#           class: nginx
