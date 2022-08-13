@@ -1,0 +1,20 @@
+# this is an example file, configure it as you need
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: messaging-api-configmap
+data:
+  
+  DB_HOST: ""
+  DB_PORT: ""
+  DB_NAME: ""
+  DB_USERNAME: ""
+  DB_PASSWORD: ""
+  APP_PORT: ""
+
+  ORIGINS: ""
+  ALLOWED_METHODS: ""
+  ALLOWED_HEADERS: ""
+
+  API_PREFIX: ""
+  GIN_MODE: ""

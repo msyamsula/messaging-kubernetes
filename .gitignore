@@ -1,2 +1,4 @@
 digital-ocean-api
 output.*
+.env
+.vscode

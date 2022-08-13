@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: messaging-api
+  name: messaging-api-deployment
   labels:
     app: messaging-api
     type: deployment
@@ -19,9 +19,60 @@ spec:
     spec:
       containers:
       - name: messaging-api
-        image: syamsuldocker/messaging-api-kubernetes:v0.0.11
+        image: syamsuldocker/messaging-api
         ports:
         - containerPort: 5000
         env:
           - name: GIN_MODE
             value: release
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: DB_HOST
+          - name: DB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: DB_PORT
+          - name: DB_USERNAME
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: DB_USERNAME
+          - name: DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: DB_NAME
+          - name: DB_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: DB_PASSWORD
+          - name: APP_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: APP_PORT
+          - name: ORIGINS
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: ORIGINS
+          - name: ALLOWED_METHODS
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: ALLOWED_METHODS
+          - name: ALLOWED_HEADERS
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: ALLOWED_HEADERS
+          - name: API_PREFIX
+            valueFrom:
+              configMapKeyRef:
+                name: messaging-api-configmap
+                key: API_PREFIX
+                
