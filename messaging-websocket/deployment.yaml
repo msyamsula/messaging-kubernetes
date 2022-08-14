@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: messaging-websocket-deployment
+  labels:
+    app: messaging-websocket
+    type: deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: messaging-websocket
+      type: pod
+  template:
+    metadata:
+      labels:
+        app: messaging-websocket
+        type: pod
+    spec:
+      containers:
+      - name: messaging-websocket
+        image: syamsuldocker/messaging-websocket
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+          - name: messaging-websocket-configmap
+            mountPath: /myconfig
+            readOnly: false
+        command: ["/bin/bash"]
+        args: ["-c", "source /myconfig/.env && node main.js"] 
+
+      volumes:
+        - name: messaging-websocket-configmap
+          configMap:
+            name: messaging-websocket-configmap
+        # - name: messaging-websocket-secret
+        #   secret:
+        #     secretName: messaging-websocket-secret
+                

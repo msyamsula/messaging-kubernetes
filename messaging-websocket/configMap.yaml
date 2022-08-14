@@ -1,0 +1,11 @@
+# this is an example file, configure it as you need, it serve as env file inside kubernetes pod
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: messaging-websocket-configmap
+data:
+  .env: |
+    #!/bin/bash
+    export APP_PORT=
+    export REDIS_URL=
+    export REDIS_PASSWORD=
