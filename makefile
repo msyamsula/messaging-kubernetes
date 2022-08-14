@@ -26,3 +26,31 @@ specific-deploy:
 	kubectl -f ${SERVICE}/clusterIP.yaml apply
 	kubectl -f ${SERVICE}/nodePort.yaml apply
 
+delete:
+	echo "deleting ${SERVICE}"
+	kubectl -f ${SERVICE}/prodConfigMap.yaml delete
+	kubectl -f ${SERVICE}/deployment.yaml delete
+	kubectl -f ${SERVICE}/clusterIP.yaml delete
+	kubectl -f ${SERVICE}/nodePort.yaml delete
+
+destroy:
+	kubectl -f postgres/prodConfigMap.yaml delete
+	kubectl -f postgres/deployment.yaml delete
+	kubectl -f postgres/clusterIP.yaml delete
+	kubectl -f postgres/nodePort.yaml delete
+
+	kubectl -f redis/prodConfigMap.yaml delete
+	kubectl -f redis/deployment.yaml delete
+	kubectl -f redis/clusterIP.yaml delete
+	kubectl -f redis/nodePort.yaml delete
+	
+	kubectl -f messaging-api/prodConfigMap.yaml delete
+	kubectl -f messaging-api/deployment.yaml delete
+	kubectl -f messaging-api/clusterIP.yaml delete
+	kubectl -f messaging-api/nodePort.yaml delete
+
+	kubectl -f messaging-websocket/prodConfigMap.yaml delete
+	kubectl -f messaging-websocket/deployment.yaml delete
+	kubectl -f messaging-websocket/clusterIP.yaml delete
+	kubectl -f messaging-websocket/nodePort.yaml delete
+
