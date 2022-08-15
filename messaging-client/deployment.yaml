@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: messaging-client
-        image: syamsuldocker/messaging-client:v0.0.2
+        image: syamsuldocker/messaging-client:v0.0.3
         ports:
         - containerPort: 80
         volumeMounts:

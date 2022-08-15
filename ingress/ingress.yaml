@@ -6,24 +6,50 @@
 # move back, add cluster issuer and tls config
 # apply this ingress again
 
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: messaging-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+#     cert-manager.io/cluster-issuer: letsencrypt-prod # cluster issuer
+# spec:
+#   tls: # tls config
+#   - hosts:
+#     - syamsulkube.my.id
+#     secretName: syamsulkube-tls
+#   rules:
+#   - host: syamsulkube.my.id
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: messaging-client-clusterip
+#             port:
+#               number: 80
+#       - path: /api
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: messaging-api-clusterip
+#             port:
+#               number: 5000
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: messaging-ingress
+  name: hello-kubernetes-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-prod # cluster issuer
 spec:
-  tls: # tls config
-  - hosts:
-    - syamsulkube.my.id
-    secretName: syamsulkube-tls
   rules:
-  - host: syamsulkube.my.id
+  - host: "syamsulapi.my.id"
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - pathType: Prefix
+        path: "/"
         backend:
           service:
             name: messaging-client-clusterip
@@ -36,3 +62,10 @@ spec:
             name: messaging-api-clusterip
             port:
               number: 5000
+      - path: /websocket
+        pathType: Prefix
+        backend:
+          service:
+            name: messaging-websocket-clusterip
+            port:
+              number: 8000
