@@ -19,6 +19,11 @@ deploy:
 	kubectl -f messaging-websocket/clusterIP.yaml apply
 	kubectl -f messaging-websocket/nodePort.yaml apply
 
+	kubectl -f messaging-client/prodConfigMap.yaml apply
+	kubectl -f messaging-client/deployment.yaml apply
+	kubectl -f messaging-client/clusterIP.yaml apply
+	kubectl -f messaging-client/nodePort.yaml apply
+
 specific-deploy:
 	echo "deploying ${SERVICE}"
 	kubectl -f ${SERVICE}/prodConfigMap.yaml apply
@@ -53,4 +58,9 @@ destroy:
 	kubectl -f messaging-websocket/deployment.yaml delete
 	kubectl -f messaging-websocket/clusterIP.yaml delete
 	kubectl -f messaging-websocket/nodePort.yaml delete
+
+	kubectl -f messaging-client/prodConfigMap.yaml delete
+	kubectl -f messaging-client/deployment.yaml delete
+	kubectl -f messaging-client/clusterIP.yaml delete
+	kubectl -f messaging-client/nodePort.yaml delete
 
