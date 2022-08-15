@@ -6,6 +6,7 @@ metadata:
 data:
   default.conf: |
     server {
+      ## edit nginx as you wish
       listen 80;
       listen [::]:80;
 
