@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: messaging-api
-        image: syamsuldocker/messaging-api
+        image: syamsuldocker/messaging-api:v0.0.0
         ports:
         - containerPort: 5000
         volumeMounts:

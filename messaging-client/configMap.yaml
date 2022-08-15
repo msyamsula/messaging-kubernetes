@@ -1,0 +1,19 @@
+# this is an example file, configure it as you need, it serve as env file inside kubernetes pod
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: messaging-client-configmap
+data:
+  default.conf: |
+    server {
+      listen 80;
+      listen [::]:80;
+
+      server_name localhost;
+
+      location / {
+          root   /usr/share/nginx/html;
+          index  index.html index.htm;
+          try_files $uri /index.html;
+      }
+    }
