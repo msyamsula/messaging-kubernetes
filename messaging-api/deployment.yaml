@@ -22,16 +22,13 @@ spec:
         image: syamsuldocker/messaging-api:v0.0.0
         ports:
         - containerPort: 5000
-        volumeMounts:
-          - name: messaging-api-configmap
-            mountPath: /myconfig
-            readOnly: false
-        command: ["/bin/bash"]
-        args: ["-c", "source /myconfig/.env && ./messaging-api"] 
-
-      volumes:
-        - name: messaging-api-configmap
-          configMap:
+        envFrom:
+        - secretRef:
+            name: messaging-api-secret
+        - configMapRef:
             name: messaging-api-configmap
+        command: ["/bin/bash"]
+        args: ["-c", "./messaging-api"]
+
           
                 

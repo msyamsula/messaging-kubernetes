@@ -1,35 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: mongo-deployment
   labels:
-    app: postgres
+    app: mongo
     type: deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: mongo
       type: pod
   template:
     metadata:
       labels:
-        app: postgres
+        app: mongo
         type: pod
     spec:
       containers:
-      - name: postgres
-        image: postgres
+      - name: mongo
+        image: mongo
         ports:
-        - containerPort: 5432
+        - containerPort: 27017
         env:
-          - name: POSTGRES_USER
+          - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:
-                name: postgres-secret
+                name: mongo-secret
                 key: USERNAME
-          - name: POSTGRES_PASSWORD
+          - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: postgres-secret
+                name: mongo-secret
                 key: PASSWORD

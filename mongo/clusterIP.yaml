@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-clusterip
+  labels:
+    app: mongo
+    type: clusterip
+spec:
+  selector:
+    app: mongo
+    type: pod
+  ports:
+    - protocol: TCP
+      port: 27017 # container port
+      targetPort: 27017 #service port

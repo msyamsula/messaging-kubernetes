@@ -12,6 +12,6 @@ spec:
     type: pod
   ports:
     - protocol: TCP
-      port: 5432
-      targetPort: 5432
-      nodePort: 30000
+      port: 5432 #container port
+      targetPort: 5432 #service port
+      nodePort: 30000 #open port

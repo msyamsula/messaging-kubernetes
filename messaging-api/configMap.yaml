@@ -4,19 +4,24 @@ kind: ConfigMap
 metadata:
   name: messaging-api-configmap
 data:
-  .env: |
-    #!/bin/bash
-    export DB_HOST=
-    export DB_PORT=
-    export DB_NAME=
-    export DB_USERNAME=
-    export DB_PASSWORD=
-    export APP_PORT=
+  APP_PORT: 
+  ORIGIN: 
+  ALLOWED_METHODS: 
+  ALLOWED_HEADERS: 
+  API_PREFIX: 
+  # .env: | # file style
+  #   #!/bin/bash
+  #   export DB_HOST=
+  #   export DB_PORT=
+  #   export DB_NAME=
+  #   export DB_USERNAME=
+  #   export DB_PASSWORD=
+  #   export APP_PORT=
 
-    export ORIGINS=
-    export ALLOWED_METHODS=
-    export ALLOWED_HEADERS=
+  #   export ORIGINS=
+  #   export ALLOWED_METHODS=
+  #   export ALLOWED_HEADERS=
 
-    export API_PREFIX=
-    export GIN_MODE=
+  #   export API_PREFIX=
+  #   export GIN_MODE=
 
