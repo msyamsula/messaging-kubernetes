@@ -22,14 +22,8 @@ spec:
         image: redis
         ports:
         - containerPort: 6379
-        volumeMounts:
-          - name: redis-configmap
-            mountPath: /myconfig
-            readOnly: false
+        envFrom:
+        - secretRef:
+            name: redis-secret
         command: ["/bin/bash"]
-        args: ["-c", "source /myconfig/.env && redis-server --requirepass $REDIS_PASSWORD"]
-
-      volumes:
-        - name: redis-configmap
-          configMap:
-            name: redis-configmap
+        args: ["-c", "redis-server --requirepass $REDIS_PASSWORD"]

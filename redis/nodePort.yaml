@@ -12,6 +12,6 @@ spec:
     type: pod
   ports:
     - protocol: TCP
-      port: 6379
-      targetPort: 6379
-      nodePort: 30002
+      port: 6379 #container port
+      targetPort: 6379 #service port
+      nodePort: 30003 #node port
