@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: messaging-websocket
-        image: syamsuldocker/syamsulapp-websocket:v0.0.2
+        image: syamsuldocker/syamsulapp-websocket:v0.0.3
         ports:
         - containerPort: 8000
         envFrom:
