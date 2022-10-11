@@ -43,9 +43,37 @@ metadata:
   name: syamsul-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "7200"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "7200"
+    # nginx.ingress.kubernetes.io/upstream-hash-by: "$arg_token"
+    # nginx.org/websocket-services: "messaging-websocket-clusterip"
+    # nginx.ingress.kubernetes.io/rewrite-target: /ws
     # tls part
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     # tls part
+
+    # websocket
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    # nginx.org/websocket-services: "gateway-cluster-ip-service"
+    # nginx.ingress.kubernetes.io/affinity: cookie
+    # nginx.ingress.kubernetes.io/secure-backends: "true"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/server-snippets: |
+    #   location / {
+    #     proxy_set_header Host $host;
+    #     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    #     proxy_pass http://messaging-websocket-clusterip:8000;
+    #     proxy_http_version 1.1;
+    #     proxy_set_header Upgrade $http_upgrade;
+    #     proxy_set_header Connection $connection_upgrade;
+
+    #     # proxy_set_header X-Forwarded-Host $http_host;
+    #     # proxy_set_header X-Forwarded-Proto $scheme;
+    #     # proxy_set_header X-Real-IP $remote_addr;
+    #     # proxy_cache_bypass $http_upgrade;
+    #     }
+    
 spec:
   # tls part, only use this after configuring cert-manager object in kubernetes and applying issuer
   tls:
@@ -64,3 +92,17 @@ spec:
             name: messaging-api-clusterip
             port:
               number: 5000 # service port
+      - path: /ws
+        pathType: Prefix
+        backend:
+          service:
+            name: messaging-websocket-clusterip
+            port:
+              number: 8000 # service port
+      - path: /socket.io # for handshake purpose
+        pathType: Prefix
+        backend:
+          service:
+            name: messaging-websocket-clusterip
+            port:
+              number: 8000 # service port

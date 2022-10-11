@@ -19,21 +19,13 @@ spec:
     spec:
       containers:
       - name: messaging-websocket
-        image: syamsuldocker/messaging-websocket
+        image: syamsuldocker/syamsulapp-websocket:v0.0.2
         ports:
         - containerPort: 8000
-        volumeMounts:
-          - name: messaging-websocket-configmap
-            mountPath: /myconfig
-            readOnly: false
+        envFrom:
+        - secretRef:
+            name: messaging-websocket-secret
         command: ["/bin/bash"]
-        args: ["-c", "source /myconfig/.env && node main.js"] 
+        args: ["-c", "node main.js"] 
 
-      volumes:
-        - name: messaging-websocket-configmap
-          configMap:
-            name: messaging-websocket-configmap
-        # - name: messaging-websocket-secret
-        #   secret:
-        #     secretName: messaging-websocket-secret
                 
