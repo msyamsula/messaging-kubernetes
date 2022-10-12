@@ -19,14 +19,14 @@ spec:
     spec:
       containers:
       - name: messaging-client
-        image: syamsuldocker/messaging-client:v0.0.3
+        image: syamsuldocker/syamsulapp-client:v0.0.0
         ports:
         - containerPort: 80
-        volumeMounts:
-          - name: messaging-client-configmap
-            mountPath: /etc/nginx/conf.d
+      #   volumeMounts:
+      #     - name: messaging-client-configmap
+      #       mountPath: /etc/nginx/conf.d
 
-      volumes:
-        - name: messaging-client-configmap
-          configMap:
-            name: messaging-client-configmap
+      # volumes:
+      #   - name: messaging-client-configmap
+      #     configMap:
+      #       name: messaging-client-configmap
