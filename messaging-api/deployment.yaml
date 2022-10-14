@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: messaging-api
-        image: syamsuldocker/syamsulapp-http:v0.0.13
+        image: syamsuldocker/syamsulapp-http:v0.0.14
         ports:
         - containerPort: 5000
         envFrom:
