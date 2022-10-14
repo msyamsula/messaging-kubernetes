@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graph-client-deployment
+  labels:
+    app: graph-client
+    type: deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graph-client
+      type: pod
+  template:
+    metadata:
+      labels:
+        app: graph-client
+        type: pod
+    spec:
+      containers:
+      - name: graph-client
+        image: syamsuldocker/syamsulapp-graph:v0.0.2
+        ports:
+        - containerPort: 80
+
+          
+                

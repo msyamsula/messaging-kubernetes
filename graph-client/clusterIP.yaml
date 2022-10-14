@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graph-client-clusterip
+  labels:
+    app: graph-client
+    type: clusterip
+spec:
+  selector:
+    app: graph-client
+    type: pod
+  ports:
+    - protocol: TCP
+      port: 80 # container port
+      targetPort: 80 # service port

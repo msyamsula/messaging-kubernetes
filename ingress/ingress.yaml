@@ -106,10 +106,17 @@ spec:
             name: messaging-websocket-clusterip
             port:
               number: 8000 # service port
-      - path: / # for handshake purpose
+      - path: /
         pathType: Prefix
         backend:
           service:
             name: messaging-client-clusterip
             port:
               number: 80 # service port
+      # - path: /
+      #   pathType: Prefix
+      #   backend:
+      #     service:
+      #       name: graph-client-clusterip
+      #       port:
+      #         number: 80 # service port
