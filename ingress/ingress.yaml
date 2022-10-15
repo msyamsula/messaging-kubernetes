@@ -80,8 +80,21 @@ spec:
   - hosts:
     - syamsulapi.my.id
     secretName: syamsul-tls
+  - hosts:
+    - syamsulapi.my.id
+    secretName: syamsul-tls
   # tls part
   rules:
+  - host: "syamsulkube.my.id"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: graph-client-clusterip
+            port:
+              number: 80 # service port
   - host: "syamsulapi.my.id"
     http:
       paths:

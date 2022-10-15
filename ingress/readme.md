@@ -9,5 +9,6 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nginx-ingress-
 
 TLS
 - Install and configure cert manager. It used for connection to Certificate Authorization (CA)
+        kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.yaml
 - run stagingIssuer.yaml/productionIssuer.yaml
 - modify ingress with tls part
