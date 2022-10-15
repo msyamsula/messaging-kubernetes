@@ -6,7 +6,7 @@ metadata:
     app: graph-client
     type: deployment
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: graph-client
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: graph-client
-        image: syamsuldocker/syamsulapp-graph:v0.0.3
+        image: syamsuldocker/syamsulapp-graph:v0.0.4
         ports:
         - containerPort: 80
 
