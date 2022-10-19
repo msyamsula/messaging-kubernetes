@@ -19,9 +19,12 @@ spec:
     spec:
       containers:
       - name: graph-client
-        image: syamsuldocker/syamsulapp-graph:v0.0.4
+        image: syamsuldocker/syamsulapp-graph:v0.0.7
         ports:
         - containerPort: 80
+        envFrom:
+        - secretRef:
+            name: graph-client-secret
 
           
                 
